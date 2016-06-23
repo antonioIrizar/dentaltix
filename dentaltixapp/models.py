@@ -23,8 +23,8 @@ class Framework(models.Model):
     name = models.CharField(max_length=50)
 
     class Meta:
-        # I order by name's frameworks. Because I see in json It is order or it is only a coincidence :).
         unique_together = ['programming_language', 'name']
+        # I order by name's frameworks. Because I see in json It is order or it is only a coincidence :).
         ordering = ['name']
 
     def __unicode__(self):

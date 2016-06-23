@@ -1,6 +1,6 @@
-from dentaltixapp.models import ProgrammingLanguage, Framework
-from rest_framework.decorators import detail_route
-from dentaltixapp.serializers import ProgrammingLanguageSerializer, FrameworkSerializer
+"""Module for view sets"""
+from dentaltixapp.models import ProgrammingLanguage
+from dentaltixapp.serializers import ProgrammingLanguageSerializer
 from rest_framework import viewsets
 from django.http import HttpResponse
 import json
@@ -8,19 +8,11 @@ from rest_framework import status
 
 
 class ProgrammingLanguageViewSet(viewsets.ModelViewSet):
+    """Class for programming_language's view sets """
     queryset = ProgrammingLanguage.objects.all()
     serializer_class = ProgrammingLanguageSerializer
     lookup_field = 'name'
-    #@detail_route(methods=['delete'], url_path='programminglanguage/(?P<language>.*)')
-    # def destroy(self, request, *args, **kwargs):
-    #     print kwargs
-    #     print "hola"
-    #     language = kwargs['pk']
-    #     result = ProgrammingLanguage.objects.filter(name=language).delete()
-    #     return HttpResponse(json.dumps(result), status=200, content_type='application/json')
 
-    # def retrieve(self, request, *args, **kwargs):
-    #     print 'hol'
     def create(self, request, *args, **kwargs):
         """redefine create because it gives problem.
         When frameworks doesn't exist and I add allow_null=True in serializer... Django
@@ -37,6 +29,3 @@ class ProgrammingLanguageViewSet(viewsets.ModelViewSet):
         else:
             response = serialized_language.errors
         return HttpResponse(json.dumps(response), status=status_to_response, content_type='application/json')
-#class FrameworkDetail(generics.RetrieveUpdateDestroyAPIView):
-#    queryset = Framework.objects.all()
-#    serializer_class = FrameworkSerializer

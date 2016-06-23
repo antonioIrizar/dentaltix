@@ -18,9 +18,8 @@ from django.contrib import admin
 from dentaltixapp.views import ProgrammingLanguageViewSet
 from rest_framework.routers import DefaultRouter
 
-
 router = DefaultRouter()
 router.register(r'programminglanguage', ProgrammingLanguageViewSet)
 
 urlpatterns = patterns('',
-    url(r'^', include(router.urls)))
+                       url(r'^', include(router.urls)))

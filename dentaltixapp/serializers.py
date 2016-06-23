@@ -17,20 +17,11 @@ class ExtendSlugRelatedField(serializers.SlugRelatedField):
 
 class ProgrammingLanguageSerializer(serializers.ModelSerializer):
     # Representation of relathionship. It uses function __unicode__
-    # framework = serializers.SlugRelatedField(many=True, slug_field='name', allow_null=True, read_only=True)
     frameworks = ExtendSlugRelatedField(many=True, slug_field='name', allow_null=True, queryset=Framework.objects.all())
 
     class Meta:
         model = ProgrammingLanguage
         fields = ('name', 'frameworks')
-
-        # def create(self, validated_data):
-        #     # frameworks_data = validated_data.pop('framework')
-        #     print 'hola'
-        #     programming_language = ProgrammingLanguage(**validated_data)
-        #     # for framework_data in frameworks_data:
-        #     #     Framework.objects.create(programming_language=programming_language, **framework_data)
-        #     return programming_language
 
 
 class FrameworkSerializer(serializers.ModelSerializer):
